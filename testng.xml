@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Regression_Test_Suite" parallel="tests" thread-count="1" verbose="10">
+ 
+ <test name="RegressionTests" preserve-order="true" >
+    <groups>
+	    <run>
+	      <include name="RegressionTest"/>
+	    </run>
+  	</groups>
+	  <packages>
+	    <package name="com.targetx.poc.tests"/>
+	  </packages>
+  </test>
+</suite>

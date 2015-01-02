@@ -17,8 +17,9 @@ public class HomePage {
 	 
 	 
 	 public void SFLogOut(){
-	 
-	   driver.findElement(By.xpath(".//*[@id='userNav-menuItems']/a[4]")).click();
+		 
+		 driver.findElement(By.id("userNavLabel")).click();
+	     driver.findElement(By.xpath(".//*[@id='userNav-menuItems']/a[4]")).click();
 		 
 	    }
 

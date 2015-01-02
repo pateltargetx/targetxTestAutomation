@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Filename: build.xml
+  Note: You have to change the followings according to your environment:
+          -<pathelement location="lib/testng/testng-5.14.7.jar"/>
+          -<pathelement location="bin"/>
+-->
+<project name="targetxTestAutomation">
+	
+	<property name="base.dir" value="." />
+	<property name="classes.dir" value="bin" />
+	<property name="src.dir" value="src" />
+	<property name="smoke_report.dir" value="test-output" />
+	<property name="smokeFailed_report.dir" value="test-output" />
+	<property name="regression_report.dir" value="test-output" />
+	<property name="smoke_Errors.dir" value="errors" />
+	<property name="regression_Errors.dir" value="errors" />
+	
+	<path id="libs">
+	  <fileset dir="lib">
+	   <include name="**\*.jar"/>
+	  </fileset>
+	  <pathelement path="${base.dir}\${classes.dir}"/>
+	 </path>
+	
+<!--	<target name="runSmokeTestSuite">
+		<antcall target="smoke_init"/>
+		 <antcall target="compile"/>
+		 <antcall target="runSmokeTests"/>
+	</target>
+	
+	<target name="runFailedSmokeTestSuite">
+			<antcall target="smokeFailed_init"/>
+			 <antcall target="compile"/>
+		     <antcall target="runFailedTests"/>
+		</target>
+-->		
+	<target name="runRegressionTestSuite">
+	<!--	  <antcall target="regression_init"/>-->
+		  <antcall target="compile"/>
+		  <antcall target="runRegressionTests"/>
+		</target>
+	
+	<!-- Delete old data and create new directories -->
+<!--	 <target name="smoke_init" >
+		  <echo>Initlizing...</echo>
+		  <delete dir="${classes.dir}" />
+		  <mkdir dir="${classes.dir}"/>
+		  <delete dir="${smoke_report.dir}" />
+		  <mkdir dir="${smoke_report.dir}"/>
+		  <delete dir="${smoke_Errors.dir}" />
+		  <mkdir dir="${smoke_Errors.dir}"/>
+	 </target>
+	
+	<target name="smokeFailed_init" >
+			  <echo>Initlizing...</echo>
+			  <delete dir="${classes.dir}" />
+			  <mkdir dir="${classes.dir}"/>
+			  <delete dir="${smokeFailed_report.dir}" />
+			  <mkdir dir="${smokeFailed_report.dir}"/>
+	 </target>
+-->	
+	<target name="regression_init" >
+		  <echo>Initlizing...</echo>
+		  <delete dir="${classes.dir}" />
+		  <mkdir dir="${classes.dir}"/>
+		  <delete dir="${regression_report.dir}" />
+		  <mkdir dir="${regression_report.dir}"/>
+		  <delete dir="${regression_Errors.dir}" />
+		  <mkdir dir="${regression_Errors.dir}"/>
+	</target>
+	
+	 <!-- Complie the java files -->
+	 <target name="compile">
+	  <echo>Compiling...</echo>
+	  <javac debug="true" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="libs" />
+	 </target>
+	
+<!--	<target name="runSmokeTests" description="Running Smoke test suite" >
+	  <echo>Running Tests...</echo>
+	  <taskdef resource="testngtasks" classpathref="libs"/>
+	  <testng outputDir="${smoke_report.dir}"
+	    haltonfailure="true"
+	  	useDefaultListeners="true"
+	  	classpathref="libs">
+	  	<xmlfileset dir="." includes="testng-smoke.xml"/>
+	  </testng>
+	 </target>
+-->	
+	<target name="runRegressionTests" description="Running Regression test suite" >
+		  <echo>Running Tests...</echo>
+		  <taskdef resource="testngtasks" classpathref="libs"/>
+		  <testng outputDir="${regression_report.dir}"
+		    haltonfailure="true"
+		  	useDefaultListeners="true"
+		  	classpathref="libs">
+		  	<xmlfileset dir="." includes="testng.xml"/>
+		  </testng>
+		 </target>
+	
+<!--	<target name="runFailedTests" description="Re-running Failed tests" >
+		  <echo>Re-running failed Tests...</echo>
+		  <taskdef resource="testngtasks" classpathref="libs"/>
+		  <testng outputDir="D:\Program Files\Jenkins\jobs\EBTestAutomation_FailedSmokeTestSuite\workspace\test-output"
+		    haltonfailure="true"
+		  	useDefaultListeners="true"
+		  	classpathref="libs">
+		  <xmlfileset dir="${smoke_report.dir}" includes="testng-failed.xml"/>
+		  </testng>
+	</target>
+-->
+</project>
